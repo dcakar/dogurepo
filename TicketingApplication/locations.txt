@@ -1,0 +1,6 @@
+Database Scripts
+Location: .\src\main\resources\db-scripts
+
+API Documentation
+Location: .\src\main\resources\api-documentation
+
