@@ -1,0 +1,31 @@
+AirlineCompanyController - Airline Company Management API
+
+Description: Add airline company
+Rest Url: http://localhost:8080/management/airline-company/add
+Http: POST
+
+Sample Request
+{
+  "name": "DELTA"
+}
+
+Description: Get airline company list
+Rest Url: http://localhost:8080/management/airline-company/list
+HTTP: GET
+
+Description: Get airline company by id
+Rest Url: htt://localhost:8080/management/airline-company/1
+HTTP: GET
+
+Description: Add flight to  airline company 
+Rest Url: htt://localhost:8080/management/airline-company/4/flights/add/1
+HTTP: POST
+
+Description: Get airline company flight list
+Rest Url: htt://localhost:8080/management/airline-company/1/flights/list
+HTTP: GET
+
+Description: Get airline company flight by flight id
+Rest Url: htt://localhost:8080/management/airline-company/1/flights/1
+HTTP: GET
+

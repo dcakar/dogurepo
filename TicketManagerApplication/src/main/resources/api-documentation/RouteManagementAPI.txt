@@ -1,0 +1,19 @@
+RouteController - Route Management API
+
+Description: Add route
+Rest Url: http://localhost:8080/management/route/add
+Http: POST
+
+Sample Request
+{
+  "departure": "ISTANBUL",
+  "arrival": "KONYA"
+}
+
+Description: Get route list
+Rest Url: http://localhost:8080/management/route/list
+HTTP: GET
+
+Description: Get route by id
+Rest Url: http://localhost:8080/management/route/1
+HTTP: GET

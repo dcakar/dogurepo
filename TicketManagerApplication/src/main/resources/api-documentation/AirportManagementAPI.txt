@@ -1,0 +1,18 @@
+AirportController - Airport Management API
+
+Description: Add airport
+Rest Url: http://localhost:8080/management/airport/add
+Http: POST
+
+Sample Request
+{
+  "name": "KONYA"
+}
+
+Description: Get airport list
+Rest Url: http://localhost:8080/management/airport/list
+HTTP: GET
+
+Description: Get airport by id
+Rest Url: htt://localhost:8080/management/airport/{1}
+HTTP: GET

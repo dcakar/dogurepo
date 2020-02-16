@@ -1,0 +1,27 @@
+FlightController - Flight Management API
+
+Description: Get flight list
+Rest Url: http://localhost:8080/management/flight/list
+Http: GET
+
+Description: Get flight list by parameters
+Rest Url: http://localhost:8080/management/flight/list/filter
+HTTP: POST
+Sample Request
+{
+  "departure": "ISTANBUL",
+  "arrival": "ANKARA",
+  "airportId": 1,
+  "airlineCompanyId": 1,
+  "flightStartDate": "16-02-2020",
+  "flightEndDate": "20-02-2020"
+}
+
+Description: Get flight by id
+Rest Url: htt://localhost:8080/management/flight/1
+HTTP: GET
+
+Description: Cancel flight by id
+Rest Url: htt://localhost:8080/management/flight/1/cancel
+HTTP: PUT
+

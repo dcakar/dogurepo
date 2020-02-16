@@ -1,0 +1,27 @@
+TicketController - Ticket Management API
+
+Description: Add airline company
+Rest Url: http://localhost:8080/management/airline-company/add
+Http: POST
+Sample Request
+{
+  "name": "DELTA"
+}
+
+Description: Get ticket by ticket number
+Rest Url: http://localhost:8080/management/ticket/FL111111
+HTTP: GET
+
+Description: Buy ticket
+Rest Url: htt://localhost:8080/management/ticket/buy
+HTTP: POST
+Sample Request
+{
+  "flightID": 1,
+  "ticketCount": 3,
+  "ticketClass": "ECONOMY"
+}
+
+Description: Cancel ticket by id
+Rest Url: http://localhost:8080/management/ticket/1/cancel
+HTTP: PUT
