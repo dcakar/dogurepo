@@ -1,6 +1,6 @@
-package com.ozan.forex.application.exception.model;
+package com.ozan.forex.application.exception.enumeration;
 
-public enum ApiErrors {
+public enum ApiErrorType {
 	MEDIA_TYPE_NOT_SUPPORTED(25000),
 	HTTP_MESSAGE_NOT_READABLE(25001),
 	METHOD_ARGUMENT_NOT_VALID(25002),
@@ -10,7 +10,7 @@ public enum ApiErrors {
 	NO_HANDLER_FOUND(25006),
 	OTHER_ERRORS(25007);
 	
-	private ApiErrors(int code) {
+	private ApiErrorType(int code) {
 		this.code = code;
 	}
 	

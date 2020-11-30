@@ -20,8 +20,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.ozan.forex.application.exception.enumeration.ApiErrorType;
 import com.ozan.forex.application.exception.model.ApiError;
-import com.ozan.forex.application.exception.model.ApiErrors;
 import com.ozan.forex.application.web.ErrorResponseEntityBuilder;
 
 @ControllerAdvice
@@ -36,7 +36,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 		builder.append(" media type is not supported. Supported media types are ");
 		ex.getSupportedMediaTypes().forEach(type -> builder.append(type).append(", "));
 		details.add(builder.toString());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.MEDIA_TYPE_NOT_SUPPORTED.getCode(), HttpStatus.BAD_REQUEST, "Invalid JSON", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.MEDIA_TYPE_NOT_SUPPORTED.getCode(), HttpStatus.BAD_REQUEST, "Invalid JSON", details);
 		return ErrorResponseEntityBuilder.build(err);
 
 	}
@@ -46,7 +46,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(ex.getMessage());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.HTTP_MESSAGE_NOT_READABLE.getCode(), HttpStatus.BAD_REQUEST, "Malformed JSON request", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.HTTP_MESSAGE_NOT_READABLE.getCode(), HttpStatus.BAD_REQUEST, "Malformed JSON request", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 
@@ -54,8 +54,8 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<String> details = new ArrayList<String>();
-		details = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getObjectName() + " : " + error.getDefaultMessage()).collect(Collectors.toList());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.METHOD_ARGUMENT_NOT_VALID.getCode(), HttpStatus.BAD_REQUEST, "Validation Errors", details);
+		details = ex.getBindingResult().getAllErrors().stream().map(error -> error.getObjectName() + " : " + error.getDefaultMessage()).collect(Collectors.toList());
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.METHOD_ARGUMENT_NOT_VALID.getCode(), HttpStatus.BAD_REQUEST, "Validation Errors", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 	
@@ -64,7 +64,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(ex.getParameterName() + " parameter is missing");
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.MISSING_SERVLET_REQUEST_PARAMETER.getCode(), HttpStatus.BAD_REQUEST, "Missing Parameters", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.MISSING_SERVLET_REQUEST_PARAMETER.getCode(), HttpStatus.BAD_REQUEST, "Missing Parameters", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 	
@@ -73,7 +73,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 			WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(ex.getMessage());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.METHOD_ARGUMENT_TYPE_MISMATCH.getCode(), HttpStatus.BAD_REQUEST, "Mismatch Type", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.METHOD_ARGUMENT_TYPE_MISMATCH.getCode(), HttpStatus.BAD_REQUEST, "Mismatch Type", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 
@@ -81,7 +81,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<?> handleConstraintViolationException(Exception ex, WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(ex.getMessage());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.CONSTRAINT_VIOLATION.getCode(), HttpStatus.BAD_REQUEST, "Constraint Violation", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.CONSTRAINT_VIOLATION.getCode(), HttpStatus.BAD_REQUEST, "Constraint Violation", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 	
@@ -90,7 +90,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpStatus status, WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.NO_HANDLER_FOUND.getCode(), HttpStatus.BAD_REQUEST, "Method Not Found", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.NO_HANDLER_FOUND.getCode(), HttpStatus.BAD_REQUEST, "Method Not Found", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 
@@ -98,7 +98,7 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
 		List<String> details = new ArrayList<String>();
 		details.add(ex.getLocalizedMessage());
-		ApiError err = new ApiError(LocalDateTime.now(), ApiErrors.OTHER_ERRORS.getCode(), HttpStatus.BAD_REQUEST, "Error occurred", details);
+		ApiError err = new ApiError(LocalDateTime.now(), ApiErrorType.OTHER_ERRORS.getCode(), HttpStatus.BAD_REQUEST, "Error occurred", details);
 		return ErrorResponseEntityBuilder.build(err);
 	}
 

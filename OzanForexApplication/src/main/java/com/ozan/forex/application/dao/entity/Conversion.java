@@ -14,10 +14,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "CONVERSIONS_LOG")
+@Table(name = "CONVERSION")
 @Getter
 @Setter
-public class ConversionsLog {
+public class Conversion {
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

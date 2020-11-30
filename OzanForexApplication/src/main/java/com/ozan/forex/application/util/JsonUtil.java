@@ -13,10 +13,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.ozan.forex.application.common.ApplicationConstants;
 
 public class JsonUtil {
-	public static final String INITIAL_JSON = "{}";
-	public static final String TIME_ZONE_ISTANBUL = "Europe/Istanbul";
 	private static ObjectMapper objectMapper;
 
 	private JsonUtil() {
@@ -28,7 +27,7 @@ public class JsonUtil {
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		objectMapper.setTimeZone(TimeZone.getTimeZone(TIME_ZONE_ISTANBUL));
+		objectMapper.setTimeZone(TimeZone.getTimeZone(ApplicationConstants.TIME_ZONE_ISTANBUL));
 		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.findAndRegisterModules();
 	}
@@ -41,10 +40,10 @@ public class JsonUtil {
 	public static String toJson(Object obj) throws Exception {
 		try {
 			if (Objects.isNull(obj)) {
-				return INITIAL_JSON;
+				return ApplicationConstants.INITIAL_JSON;
 			}
 			if (obj instanceof Collection) {
-				return CollectionUtils.isEmpty((Collection<Object>) obj) ? INITIAL_JSON : writeAsString(obj);
+				return CollectionUtils.isEmpty((Collection<Object>) obj) ? ApplicationConstants.INITIAL_JSON : writeAsString(obj);
 			}
 			if (obj instanceof String) {
 				return (String) obj;

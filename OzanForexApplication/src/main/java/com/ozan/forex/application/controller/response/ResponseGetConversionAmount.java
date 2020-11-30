@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseConversionAmount {
+public class ResponseGetConversionAmount {
 	private BigDecimal conversionAmount;
 	private String transactionId;
 }
